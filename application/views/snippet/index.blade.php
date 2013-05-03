@@ -1,0 +1,1 @@
+This is the /Users/jw900155/Sites/_personal/library.dev/application/views/snippet/index.blade.php view
