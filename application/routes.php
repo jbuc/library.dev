@@ -32,24 +32,17 @@
 |
 */
 
-Route::get('/', array('as' => 'home', 'uses' => 'home@index'));
+Route::get('/', array('as' => 'home', 'uses' => 'snippets@index'));
 // snippet Resource
 Route::get('snippets', array('as' => 'snippets', 'uses' => 'snippets@index'));
 Route::get('snippets/(:any)', array('as' => 'snippet', 'uses' => 'snippets@show'));
 Route::get('snippets/new', array('as' => 'new_snippet', 'uses' => 'snippets@new'));
-Route::get('snippets/(:any)edit', array('as' => 'edit_snippet', 'uses' => 'snippets@edit'));
+Route::get('snippets/(:any)/edit', array('as' => 'edit_snippet', 'uses' => 'snippets@edit'));
 Route::post('snippets', 'snippets@create');
 Route::put('snippets/(:any)', 'snippets@update');
 Route::delete('snippets/(:any)', 'snippets@destroy');
 
-// bookmark Resource
-Route::get('bookmarks', array('as' => 'bookmarks', 'uses' => 'bookmarks@index'));
-Route::get('bookmarks/(:any)', array('as' => 'bookmark', 'uses' => 'bookmarks@show'));
-Route::get('bookmarks/new', array('as' => 'new_bookmark', 'uses' => 'bookmarks@new'));
-Route::get('bookmarks/(:any)edit', array('as' => 'edit_bookmark', 'uses' => 'bookmarks@edit'));
-Route::post('bookmarks', 'bookmarks@create');
-Route::put('bookmarks/(:any)', 'bookmarks@update');
-Route::delete('bookmarks/(:any)', 'bookmarks@destroy');
+
 
 /*
 |--------------------------------------------------------------------------

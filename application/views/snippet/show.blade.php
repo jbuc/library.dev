@@ -1,1 +1,4 @@
-This is the /Users/jw900155/Sites/_personal/library.dev/application/views/snippet/show.blade.php view
+@layout('master')
+@section('content')
+	<p>Show one snippet</p>
+@endsection

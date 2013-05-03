@@ -6,7 +6,7 @@ class Snippets_Controller extends Base_Controller {
 
 	public function get_index()
     {
-
+        return View::make('snippet.index');
     }    
 
 	public function post_index()
@@ -16,7 +16,7 @@ class Snippets_Controller extends Base_Controller {
 
 	public function get_show()
     {
-
+        return View::make('snippet.show');
     }    
 
 	public function get_edit()
