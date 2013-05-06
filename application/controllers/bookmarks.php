@@ -2,41 +2,37 @@
 
 class Bookmarks_Controller extends Base_Controller {
 
-	public $restful = true;    
+    public  = true;    
 
-	public function get_index()
+    public function get_index()
     {
-        // authenticate user
-
-        return 'show all bookmarks';
-    }    
-
-	public function post_index()
-    {
-        // authenticate user
-        
-        // add create bookmark
-
-        Redirect::to_route('bookmarks');
-    }    
-
-	public function get_new()
-    {
-        
-    }    
-
-	public function put_update()
-    {
-        // authenticate user
-
-        // update fields
-    }    
-
-	public function delete_destroy()
-    {
-        // authenticate user
-
-        // delete bookmark
+        // Route::get('bookmarks', array('as' => 'bookmarks', 'uses' => 'bookmarks@index'));
+        // View::make('bookmark.index');
+        return 'display a list of all bookmarks';
     }
-
+    public function post_index()
+    {
+        // Route::post('bookmarks', 'bookmarks@create');
+        return 'create a new bookmark';
+    }
+    public function get_new()
+    {
+        // Route::get('bookmarks/new', array('as' => 'new_bookmark', 'uses' => 'bookmarks@new'));
+        // View::make('bookmark.new');
+        return 'return an HTML form for creating a new bookmark';
+    }
+    public function put_update()
+    {
+        // Route::put('bookmarks/(:any)', 'bookmarks@update');
+        return 'update a specific bookmark.';
+    }
+    public function delete_destroy()
+    {
+        // Route::delete('bookmarks/(:any)', 'bookmarks@destroy');
+        return 'delete a specific bookmark';
+    }
 }
+
+
+
+
