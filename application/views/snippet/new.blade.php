@@ -1,7 +1,7 @@
 @layout('master')
 
 @section('content')
-	{{Form::open('/snippets')}}
+	{{Form::open('/')}}
 		<div class="formWrapper">
 			<div class="inputGroup title">
 				{{-- Form::label('title', 'Snippet Name')}}
@@ -25,7 +25,7 @@
 			{{Form::textarea('code', '', array('placeholder' => 'Paste HTML'))}}
 		</div>
 
-		{{Form::hidden('Activate', 'inactive')}}
+		{{Form::hidden('active', false)}}
 		{{Form::submit('Create Snippet')}}
 	{{Form::close()}}
 @endsection

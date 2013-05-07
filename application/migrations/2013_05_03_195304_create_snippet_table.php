@@ -7,11 +7,12 @@ class Create_Snippet_Table {
 		Schema::create('snippet', function($table) {
 			$table->increments('id');
 			$table->integer('base_id');
-			$table->integer('title');
-			$table->integer('tags');
+			$table->string('title');
+			$table->string('tags');
 			$table->string('url');
-			$table->string('shopRecord');
+			$table->string('shoprecord');
 			$table->text('code');
+			$table->boolean('active');
 			$table->timestamps();
 		});
 

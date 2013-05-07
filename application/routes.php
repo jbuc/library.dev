@@ -32,15 +32,13 @@
 |
 */
 
-Route::get('/', array('as' => 'home', 'uses' => 'snippets@index'));
-// snippet Resource
-Route::get('snippets', array('as' => 'snippets', 'uses' => 'snippets@index'));
-Route::get('snippets/(:any)', array('as' => 'snippet', 'uses' => 'snippets@show'));
-Route::get('snippets/new', array('as' => 'new_snippet', 'uses' => 'snippets@new'));
-Route::get('snippets/(:any)/edit', array('as' => 'edit_snippet', 'uses' => 'snippets@edit'));
-Route::post('snippets', 'snippets@create');
-Route::put('snippets/(:any)', 'snippets@update');
-Route::delete('snippets/(:any)', 'snippets@destroy');
+Route::get('/', array('as' => 'snippets', 'uses' => 'snippets@index'));
+Route::get('/(:any)', array('as' => 'snippet', 'uses' => 'snippets@show'));
+Route::get('/new', array('as' => 'new_snippet', 'uses' => 'snippets@new'));
+Route::get('/(:any)/edit', array('as' => 'edit_snippet', 'uses' => 'snippets@edit'));
+Route::post('/', 'snippets@index');
+Route::put('/(:any)', 'snippets@update');
+Route::delete('/(:any)', 'snippets@destroy');
 
 
 
