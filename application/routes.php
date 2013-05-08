@@ -34,6 +34,7 @@
 
 Route::get('/', array('as' => 'snippets', 'uses' => 'snippets@index'));
 Route::get('/(:any)', array('as' => 'snippet', 'uses' => 'snippets@show'));
+Route::get('/(:any)/preview', array('as' => 'preview_snippet', 'uses' => 'snippets@preview'));
 Route::get('/new', array('as' => 'new_snippet', 'uses' => 'snippets@new'));
 Route::get('/(:any)/edit', array('as' => 'edit_snippet', 'uses' => 'snippets@edit'));
 Route::post('/', 'snippets@index');

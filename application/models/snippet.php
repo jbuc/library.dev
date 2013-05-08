@@ -2,7 +2,6 @@
 
 class Snippet extends Eloquent 
 {
-	public static $table = 'snippet';
 
 	public static $rules = array(
 		'title' => 'required',

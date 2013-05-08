@@ -1,4 +1,7 @@
 @layout('master')
 @section('content')
-	<p>Show all snippets</p>
+	@foreach ($snippets as $snippet)
+		<p>{{$snippet->title}} - <a href="{{$snippet->url}}" style="color:#ccc">preview</a></p>
+		<pre>{{$snippet->code}}</pre>
+	@endforeach
 @endsection
