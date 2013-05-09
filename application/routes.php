@@ -1,36 +1,5 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| Simply tell Laravel the HTTP verbs and URIs it should respond to. It is a
-| breeze to setup your application using Laravel's RESTful routing and it
-| is perfectly suited for building large applications and simple APIs.
-|
-| Let's respond to a simple GET request to http://example.com/hello:
-|
-|		Route::get('hello', function()
-|		{
-|			return 'Hello World!';
-|		});
-|
-| You can even respond to more than one URI:
-|
-|		Route::post(array('hello', 'world'), function()
-|		{
-|			return 'Hello World!';
-|		});
-|
-| It's easy to allow URI wildcards using (:num) or (:any):
-|
-|		Route::put('hello/(:any)', function($name)
-|		{
-|			return "Welcome, $name.";
-|		});
-|
-*/
 
 Route::get('/', array('as' => 'snippets', 'uses' => 'snippets@index'));
 Route::get('/(:any)', array('as' => 'snippet', 'uses' => 'snippets@show'));
@@ -41,6 +10,7 @@ Route::post('/', 'snippets@index');
 Route::put('/(:any)', 'snippets@update');
 Route::delete('/(:any)', 'snippets@destroy');
 
+Route::get('photos/(:num)x(:num).png', array('as' => 'photo', 'uses' => 'photos@index'));
 
 
 /*
@@ -96,6 +66,10 @@ Event::listen('500', function($exception)
 |		}));
 |
 */
+Route::filter('image', function($response)
+{
+    $response->header('content-type', 'image/png');
+});
 
 Route::filter('before', function()
 {

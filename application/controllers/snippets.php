@@ -15,25 +15,28 @@ class Snippets_Controller extends Base_Controller {
     }
     
     // SHOW ONE SNIPPET (for DEVELOPERS)
-    public function get_show($id) {
-        $snippet = Snippet::find(1);
-        
+    public function get_show($base_id) {
+        $snippet = Snippet::order_by('id', 'desc')->where_base_id($base_id)->first();
+
         return View::make('snippet.show')
                     ->with('snippet', $snippet);
     }
 
     // SHOW ONE SNIPPET (for PREVIEW)
-    public function get_preview($id) {
-        $snippet = Snippet::find(1);
-        
+    public function get_preview($base_id) {
+        $snippet = Snippet::order_by('id', 'desc')->where_base_id($base_id)->first();
+        dd($snippet);
         return View::make('snippet.preview')
                     ->with('snippet', $snippet);
     }
 
     // EDIT A SNIPPET
-    public function get_edit($id) {
+    public function get_edit($base_id) {
 
-        return 'return an HTML form to edit a specific snippet';
+        $snippet = Snippet::order_by('id', 'desc')->where_base_id($base_id)->first();
+
+        return View::make('snippet.edit')
+                    ->with('snippet', $snippet);
     }
     public function get_new() {
         return View::make('snippet.new');

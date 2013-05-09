@@ -1,1 +1,6 @@
-This is the /Users/jw900155/Sites/_personal/library.dev/application/views/bookmark/edit.blade.php view
+@layout('master')
+
+@section('content')
+show bookmark
+
+@endsection
