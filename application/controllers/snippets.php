@@ -8,7 +8,23 @@ class Snippets_Controller extends Base_Controller {
 
     // HOME PAGE
     public function get_index() {
-        $snippets = Snippet::all();
+        $b_snippets = DB::table('snippets')
+                        ->order_by('id', 'desc')
+                        // ->group_by('base_id')
+                        ->order_by('title', 'asc')
+                        ->get();
+        
+        $snippets = array();
+        $base_id  = 0;
+
+        foreach($b_snippets as $snippet)
+        {
+            if ($base_id !== $snippet->base_id)
+            {
+                $snippets[] = $snippet;
+                $base_id = $snippet->base_id;
+            }
+        }
 
         return View::make('snippet.index')
                     ->with('snippets', $snippets);
@@ -25,7 +41,6 @@ class Snippets_Controller extends Base_Controller {
     // SHOW ONE SNIPPET (for PREVIEW)
     public function get_preview($base_id) {
         $snippet = Snippet::order_by('id', 'desc')->where_base_id($base_id)->first();
-        dd($snippet);
         return View::make('snippet.preview')
                     ->with('snippet', $snippet);
     }
@@ -38,13 +53,22 @@ class Snippets_Controller extends Base_Controller {
         return View::make('snippet.edit')
                     ->with('snippet', $snippet);
     }
+
+
+    public function post_update($base_id) {
+        $inputs = Input::all();
+        $inputs['base_id'] = $base_id;
+        $new_snippet = Snippet::create($inputs);
+
+        if($new_snippet) {
+            return Redirect::to_route('snippets');
+        }
+    }
+
+    // ADD THE SNIPPET
     public function get_new() {
         return View::make('snippet.new');
     }
-
-
-
-    // ADD THE SNIPPET
     public function post_index() {
 
         $validation_errors = Snippet::validate(Input::get());
@@ -56,15 +80,14 @@ class Snippets_Controller extends Base_Controller {
         }
 
         $new_snippet = Snippet::create(Input::all());
+        $new_snippet->base_id = $new_snippet->id;
+        $new_snippet->save(); 
 
         if($new_snippet) {
             return Redirect::to_route('snippets');
         }
     }
 
-    public function put_update() {
-        return 'update a specific snippet.';
-    }
     public function delete_destroy() {
         return 'delete a specific snippet';
     }

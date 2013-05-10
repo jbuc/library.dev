@@ -13,6 +13,7 @@ class Create_Snippets_Table {
 			$table->string('shoprecord');
 			$table->text('code');
 			$table->boolean('active');
+			$table->string('user_id');
 			$table->timestamps();
 	});
 

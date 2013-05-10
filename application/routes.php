@@ -1,14 +1,15 @@
 <?php
 
-
 Route::get('/', array('as' => 'snippets', 'uses' => 'snippets@index'));
-Route::get('/(:any)', array('as' => 'snippet', 'uses' => 'snippets@show'));
-Route::get('/(:any)/preview', array('as' => 'preview_snippet', 'uses' => 'snippets@preview'));
+Route::get('/(:num)', array('as' => 'snippet', 'uses' => 'snippets@show'));
+
+Route::post('/(:num)', 'snippets@update');
+
+Route::get('/(:num)/preview', array('as' => 'preview_snippet', 'uses' => 'snippets@preview'));
 Route::get('/new', array('as' => 'new_snippet', 'uses' => 'snippets@new'));
-Route::get('/(:any)/edit', array('as' => 'edit_snippet', 'uses' => 'snippets@edit'));
+Route::get('/(:num)/edit', array('as' => 'edit_snippet', 'uses' => 'snippets@edit'));
 Route::post('/', 'snippets@index');
-Route::put('/(:any)', 'snippets@update');
-Route::delete('/(:any)', 'snippets@destroy');
+Route::delete('/(:num)', 'snippets@destroy');
 
 Route::get('photos/(:num)x(:num).png', array('as' => 'photo', 'uses' => 'photos@index'));
 
@@ -17,16 +18,6 @@ Route::get('photos/(:num)x(:num).png', array('as' => 'photo', 'uses' => 'photos@
 |--------------------------------------------------------------------------
 | Application 404 & 500 Error Handlers
 |--------------------------------------------------------------------------
-|
-| To centralize and simplify 404 handling, Laravel uses an awesome event
-| system to retrieve the response. Feel free to modify this function to
-| your tastes and the needs of your application.
-|
-| Similarly, we use an event to handle the display of 500 level errors
-| within the application. These errors are fired when there is an
-| uncaught exception thrown in the application. The exception object
-| that is captured during execution is then passed to the 500 listener.
-|
 */
 
 Event::listen('404', function()
@@ -43,28 +34,6 @@ Event::listen('500', function($exception)
 |--------------------------------------------------------------------------
 | Route Filters
 |--------------------------------------------------------------------------
-|
-| Filters provide a convenient method for attaching functionality to your
-| routes. The built-in before and after filters are called before and
-| after every request to your application, and you may even create
-| other filters that can be attached to individual routes.
-|
-| Let's walk through an example...
-|
-| First, define a filter:
-|
-|		Route::filter('filter', function()
-|		{
-|			return 'Filtered!';
-|		});
-|
-| Next, attach the filter to a route:
-|
-|		Route::get('/', array('before' => 'filter', function()
-|		{
-|			return 'Hello World!';
-|		}));
-|
 */
 Route::filter('image', function($response)
 {

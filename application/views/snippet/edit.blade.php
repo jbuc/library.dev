@@ -7,7 +7,7 @@
 @endsection
 @section('content')
 	<h1>Edit snippet: {{$snippet->title}}</h1>
-	{{Form::open('/'.$snippet->base_id, 'PUT')}}
+	{{Form::open("/$snippet->base_id")}}
 		<div class="formWrapper">
 			<div class="inputGroup title">
 				{{Form::label('title', 'Snippet Name')}}
