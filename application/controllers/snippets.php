@@ -9,22 +9,15 @@ class Snippets_Controller extends Base_Controller {
     // HOME PAGE
     public function get_index() {
         $b_snippets = DB::table('snippets')
+                        ->order_by('base_id', 'desc')
                         ->order_by('id', 'desc')
-                        // ->group_by('base_id')
-                        ->order_by('title', 'asc')
                         ->get();
-        
+                        
         $snippets = array();
-        $base_id  = 0;
-
-        foreach($b_snippets as $snippet)
-        {
-            if ($base_id !== $snippet->base_id)
-            {
-                $snippets[] = $snippet;
-                $base_id = $snippet->base_id;
-            }
-        }
+        $base_id = 0;
+        foreach($b_snippets as $snip) { if ($snip->base_id !== $base_id) { $snippets[] = $snip; $base_id = $snip->base_id; } }
+        function srt($a, $b) { return strcmp($a->title, $b->title); }
+        usort($snippets, "srt");
 
         return View::make('snippet.index')
                     ->with('snippets', $snippets);
