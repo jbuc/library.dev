@@ -26,6 +26,6 @@
 		</div>
 
 		{{Form::hidden('active', false)}}
-		{{Form::submit('Create Snippet')}}
+		{{Form::submit('Create Snippet', array('class' => 'btn btn-large'))}}
 	{{Form::close()}}
 @endsection

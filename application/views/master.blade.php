@@ -3,6 +3,8 @@
 <head>
 	<meta charset="UTF-8">
 	<title>The Dev Library :: repeat and reuse</title>
+	<link rel="stylesheet" href="/css/vendor/flatui/bootstrap.css">
+	<link rel="stylesheet" href="/css/vendor/flatui/flat-ui.css">
 	@yield('styles')
 </head>
 <body>
