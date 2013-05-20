@@ -14,6 +14,16 @@
                        mode: null}]
       };
       var editor = CodeMirror.fromTextArea(document.getElementById("code"), {mode: mixedMode, theme:'twilight', readOnly:true, lineNumbers:true, tabMode: "indent"});
+
+      	var setHeight = function(el){
+			el.height($(window).height() - 50);
+		}
+
+		setHeight($('.CodeMirror'));
+
+		$(window).resize(function(){
+			setHeight($('.CodeMirror'));			
+		});
     </script>
 @endsection
 @section('styles')
