@@ -14,14 +14,27 @@
                        mode: null}]
       };
       var editor = CodeMirror.fromTextArea(document.getElementById("code"), {mode: mixedMode, theme:'twilight', lineNumbers:true, tabMode: "indent"});
+
+	  	var setHeight = function(el){
+			el.height($(window).height() - 350);
+		}
+
+		setHeight($('.CodeMirror'));
+
+		$(window).resize(function(){
+			setHeight($('.CodeMirror'));			
+		});
     </script>
 @endsection
 @section('styles')
 	<link rel="stylesheet" href="/css/vendor/cm/codemirror.css">
 	<link rel="stylesheet" href="/css/vendor/cm/twilight.css">
 	<style>
-		label {display:block;}
-		input[type='text'], textarea {display:block; box-sizing:border-box; width:100%;}
+		.finalBtns {position: fixed; top:1rem; right:1rem;z-index: 999;}
+		label {display:block;color:#777;}
+		input[type="text"] {color:#607392;}
+		input[type="text"]:focus {border-color:#607392;}
+		input[type='text'], textarea {display:block; box-sizing:border-box; width:98%; height:auto;}
 		.CodeMirror {min-height: 500px; border:1px solid #303030;}
 		body {background: #262626; color:#eee;}
 	</style>
@@ -49,10 +62,15 @@
 		</div>
 		<div class="code">
 			{{Form::label('code', 'Paste HTML')}}
-			{{Form::textarea('code', $snippet->code, array('placeholder' => 'Paste HTML'), array('id' => 'code'))}}
+			{{Form::textarea('code', $snippet->code, array('placeholder' => 'Paste HTML', 'id' => 'code'))}}
 		</div>
 
 		{{Form::hidden('active', false)}}
-		{{Form::submit('Update Snippet')}}
+		<div class="finalBtns btn-group">
+			{{Form::submit('Update Snippet', array('class' => 'btn', 'id' => 'submitBtn'))}}			
+			<a href="{{URL::to_route('edit_snippet', $snippet->base_id)}}" class="btn edit"><i class="fui-new-16"></i></a>
+			<a href="{{URL::to_route('preview_snippet', $snippet->base_id)}}" class="btn preview"><i class="fui-eye-16"></i></a>
+			{{HTML::link_to_route('snippet', '&times;', $snippet->base_id, array('class' => 'btn btn-disabled'))}}
+		</div>
 	{{Form::close()}}
 @endsection
